@@ -41,9 +41,15 @@ Hofstadder:         #TAG DA FUNÇÃO
 
     beq $a0, 1, L1  #SE $a0 == 1 (SATISFAZ E VAI PRA L1) ou $a0 != (NÃO SATISFAZ E CONTINUA)
     beq $a0, 2, L1  #SE $a0 == 2 (SATISFAZ E VAI PRA L1) ou $a0 != (NÃO SATISFAZ E CONTINUA)
+
     li $v0, 4       #COMANDO DE IMPRESSÃO DE UMA STRING NA TELA
     la $a0, msg5    #IMPRIME MENSAGEM ($a0 É O REGISTRADOR QUE IRÁ CONTER O VALOR A SER IMPRESSO)
     syscall         #CHAMADA DO SISTEMA
+
+    add       $a1, $a0, $zero    #a1 = a0 :: ATRIBUIÇÃO PARA OUTRA VARIÁVEL DE MODO A MANTER O VALOR
+    addi      $a0, $a0 , -1      #a0 = a0 -1 :: DECREMENTAÇÃO
+
+
 
     jr $ra          #RETURN (RETORNA PARA O LUGAR DE ORIGEM ONDE FOI CHAMADO)
 
