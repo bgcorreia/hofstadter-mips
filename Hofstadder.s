@@ -37,7 +37,7 @@ main:                       #PONTO DE ENTRADA
 
     move $a0, $v0           #MOVE-SE ENTRE REGISTRADORES - $ZERO É A CONSTANTE 0
 
-    #li $v0, 1
+    #li $v0, 1              #SOMA O VALOR EM $v0 COM 1 E ARMAZENA EM $s0
     #la $a0, ($a1)
     #syscall
 
@@ -79,24 +79,27 @@ Hofstadder:                 #TAG DA FUNÇÃO
 
     move $a1, $a0           #a1 = a0 , vamos precisar do valor incicial de n
     addi $a0, $a0, -1       #a0 = a0 -1
+    j primeira
 
-    #primeira parte
+primeira:                   #parte
     jal Hofstadder          #a(n-1)
     move $a0, $v0           #n = return de a(n-1)
     jal Hofstadder          #a(a(n-1))
     move $a0, $v0           #return de a(a(n-1))
-    move $s3, $a0
+    move $s3, $a0           #REGISTRA EM $s3 O VALOR DE $a0
 
-    #segunda parte
+    j segunda
+
+segunda:                    #parte
     jal Hofstadder          #a(n-1)
     move $a0, $v0           #n = return de a(n-1)
-    sub $a0, $a1, $a0       #return n-a(n-1)
+    sub $a0, $a1, $v0       #return n-a(n-1)
     jal Hofstadder          #a(n-a(n-1))
     move $a0, $v0           #return a(n-a(n-1))
 
     add $s4, $s3, $a0       #SOMA H(1 PARTE)+H(2 PARTE)
 
-    move $v0, $s4
+    move $v0, $s4           #COLOCA O VALOR DA SOMA NO REGISTRADOR $v0 SER USADO NA ITERAÇÃO
 
     j EXIT
 
