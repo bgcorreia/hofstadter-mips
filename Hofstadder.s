@@ -45,8 +45,8 @@ main:                       #PONTO DE ENTRADA
     #la $a0, msg6            #IMPRIME MENSAGEM ($a0 É O REGISTRADOR QUE IRÁ CONTER O VALOR A SER IMPRESSO)
     #syscall                 #CHAMADA DO SISTEMA
 
-    li $v0, 10              # COMANDO DE EXIT
-    syscall                 # EFETUA CHAMADA AO SISTEMA
+    #li $v0, 10              # COMANDO DE EXIT
+    #syscall                 # EFETUA CHAMADA AO SISTEMA
 
 Loop:                       # TAG DO LOOP
     beq $a0, $s0, End
@@ -113,4 +113,5 @@ EXIT:
     jr $ra
 
 End:
-    jr $ra
+    li $v0, 10              # COMANDO DE EXIT
+    syscall                 # EFETUA CHAMADA AO SISTEMA
